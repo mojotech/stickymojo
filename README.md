@@ -6,7 +6,7 @@ stickyMojo is a contained sticky sidebar plugin for jQuery. It's lightweight, fa
 Credits
 ==========
 
-![MojoTech](http://mojotech.github.com/stickymojo/)
+[![MojoTech](http://www.mojotech.com/press/logo.png)](http://www.mojotech.com)
 
 License
 ==========
