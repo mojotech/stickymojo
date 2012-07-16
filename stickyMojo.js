@@ -26,13 +26,13 @@
         buildSticky();
       });
 
-      function buildSticky(){
+      function buildSticky() {
         if (!errors.length) {
           sticky.el.css('left', sticky.stickyLeft);
 
           sticky.win.bind({
-            'scroll' : stick,
-            'resize' : function() {
+            'scroll': stick,
+            'resize': function() {
               sticky.el.css('left', sticky.stickyLeft);
               stick();
             }
@@ -51,51 +51,47 @@
         settings.footerID = $(settings.footerID);
         settings.contentID = $(settings.contentID);
       }
+
       //  Calcualtes the limits top and bottom limits for the sidebar
       function calculateLimits() {
         return {
-          limit     : settings.footerID.offset().top - sticky.stickyHeight,
-          windowTop : sticky.win.scrollTop(),
-          stickyTop : sticky.stickyTop2 - sticky.marg
+          limit: settings.footerID.offset().top - sticky.stickyHeight,
+          windowTop: sticky.win.scrollTop(),
+          stickyTop: sticky.stickyTop2 - sticky.marg
         }
       }
 
       // Sets sidebar to fixed position
       function setFixedSidebar() {
         sticky.el.css({
-            position: 'fixed',
-            top: 0
-          });
-        return;
+          position: 'fixed',
+          top: 0
+        });
       }
 
       // Determines the sidebar orientation and sets margins accordingly
       function checkOrientation() {
         if (settings.orientation === "left") {
-            settings.contentID.css('margin-left', sticky.el.outerWidth(true));
-          }
-        else {
+          settings.contentID.css('margin-left', sticky.el.outerWidth(true));
+        } else {
           sticky.el.css('margin-left', settings.contentID.outerWidth(true));
         }
-        return;
       }
 
       // sets sidebar to a static positioned element
       function setStaticSidebar() {
         sticky.el.css({
-          'position': 'static', 
-          'margin-left' : '0px'
+          'position': 'static',
+          'margin-left': '0px'
         });
         settings.contentID.css('margin-left', '0px');
-        return;
       }
 
       // initiated to stop the sidebar from intersecting the footer
       function setLimitedSidebar(diff) {
         sticky.el.css({
-            top: diff
-          });
-        return;
+          top: diff
+        });
       }
 
       //determines whether sidebar should stick and applies appropriate settings to make it stick
@@ -106,15 +102,13 @@
         if (hitBreakPoint) {
           setFixedSidebar();
           checkOrientation();
-        }
-        else {
+        } else {
           setStaticSidebar();
         }
         if (tops.limit < tops.windowTop) {
           var diff = tops.limit - tops.windowTop;
           setLimitedSidebar(diff);
         }
-        return;
       }
 
       // verifies that all settings are correct
@@ -138,16 +132,12 @@
             rv = parseFloat(RegExp.$1);
           }
         }
-        switch (true) {
-        case (rv >= 8.0):
+        if (rv >= 8.0) {
           return false;
-          break;
-        case (rv > -1):
+        } else if (rv > -1) {
           return true;
-          break;
-        default:
+        } else {
           return false;
-          break;
         }
       }
     }
