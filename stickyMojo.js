@@ -20,9 +20,13 @@
       };
 
       var errors = checkSettings();
-      setIDs();
+      cacheElements();
 
       return this.each(function() {
+        buildSticky();
+      });
+
+      function buildSticky(){
         if (!errors.length) {
           sticky.el.css('left', sticky.stickyLeft);
 
@@ -40,13 +44,14 @@
             alert(errors);
           }
         }
-      });
+      }
 
-      function setIDs() {
+      // Caches the footer and content elements into jquery objects
+      function cacheElements() {
         settings.footerID = $(settings.footerID);
         settings.contentID = $(settings.contentID);
       }
-      //  Calcualtes the limits for blah
+      //  Calcualtes the limits top and bottom limits for the sidebar
       function calculateLimits() {
         return {
           limit     : settings.footerID.offset().top - sticky.stickyHeight,
@@ -55,49 +60,64 @@
         }
       }
 
-      function fixSidebar() {
+      // Sets sidebar to fixed position
+      function setFixedSidebar() {
         sticky.el.css({
             position: 'fixed',
             top: 0
           });
+        return;
       }
-      function checkLeftRight() {
+
+      // Determines the sidebar orientation and sets margins accordingly
+      function checkOrientation() {
         if (settings.orientation === "left") {
             settings.contentID.css('margin-left', sticky.el.outerWidth(true));
           }
         else {
           sticky.el.css('margin-left', settings.contentID.outerWidth(true));
         }
-      }
-      function staticSidebar() {
-        sticky.el.css('position', 'static');
-        settings.contentID.css('margin-left', '0px');
-        sticky.el.css('margin-left', '0px');
+        return;
       }
 
-      function limitedSidebar(diff) {
+      // sets sidebar to a static positioned element
+      function setStaticSidebar() {
+        sticky.el.css({
+          'position': 'static', 
+          'margin-left' : '0px'
+        });
+        settings.contentID.css('margin-left', '0px');
+        return;
+      }
+
+      // initiated to stop the sidebar from intersecting the footer
+      function setLimitedSidebar(diff) {
         sticky.el.css({
             top: diff
           });
+        return;
       }
 
+      //determines whether sidebar should stick and applies appropriate settings to make it stick
       function stick() {
         var tops = calculateLimits();
         var hitBreakPoint = tops.stickyTop < tops.windowTop && (sticky.win.width() >= sticky.breakPoint);
 
         if (hitBreakPoint) {
-          fixSidebar();
-          checkLeftRight();
+          setFixedSidebar();
+          checkOrientation();
         }
         else {
-          staticSidebar();
+          setStaticSidebar();
         }
         if (tops.limit < tops.windowTop) {
           var diff = tops.limit - tops.windowTop;
-          limitedSidebar(diff);
+          setLimitedSidebar(diff);
         }
+        return;
       }
 
+      // verifies that all settings are correct
       function checkSettings() {
         var errors = [];
         for (var key in settings) {
