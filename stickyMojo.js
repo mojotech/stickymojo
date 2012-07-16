@@ -19,47 +19,82 @@
         'marg': parseInt($(this).css('margin-top'), 10)
       };
 
-      checkSettings();
-      if (ieVersion()) {
-        return;
-      }
+      var errors = checkSettings();
+      setIDs();
+
       return this.each(function() {
-        sticky.el.css('left', sticky.stickyLeft);
-
-        sticky.win.scroll(function() {
-          stick();
-        });
-
-        sticky.win.resize(function() {
+        if (!errors.length) {
           sticky.el.css('left', sticky.stickyLeft);
-          stick();
-        });
+
+          sticky.win.bind({
+            'scroll' : stick,
+            'resize' : function() {
+              sticky.el.css('left', sticky.stickyLeft);
+              stick();
+            }
+          });
+        } else {
+          if (console && console.warn) {
+            console.warn(errors);
+          } else {
+            alert(errors);
+          }
+        }
       });
 
-      function stick() {
-        var limit = $(settings.footerID).offset().top - sticky.stickyHeight;
-        var windowTop = sticky.win.scrollTop();
-        var stickyTop = sticky.stickyTop2 - sticky.marg;
-        if (stickyTop < windowTop && (sticky.win.width() >= sticky.breakPoint)) {
-          sticky.el.css({
+      function setIDs() {
+        settings.footerID = $(settings.footerID);
+        settings.contentID = $(settings.contentID);
+      }
+      //  Calcualtes the limits for blah
+      function calculateLimits() {
+        return {
+          limit     : settings.footerID.offset().top - sticky.stickyHeight,
+          windowTop : sticky.win.scrollTop(),
+          stickyTop : sticky.stickyTop2 - sticky.marg
+        }
+      }
+
+      function fixSidebar() {
+        sticky.el.css({
             position: 'fixed',
             top: 0
           });
-          if (settings.orientation === "left") {
-            $(settings.contentID).css('margin-left', sticky.el.outerWidth(true));
-          } else {
-            sticky.el.css('margin-left', $(settings.contentID).outerWidth(true));
+      }
+      function checkLeftRight() {
+        if (settings.orientation === "left") {
+            settings.contentID.css('margin-left', sticky.el.outerWidth(true));
           }
-        } else {
-          sticky.el.css('position', 'static');
-          $(settings.contentID).css('margin-left', '0px');
-          sticky.el.css('margin-left', '0px');
+        else {
+          sticky.el.css('margin-left', settings.contentID.outerWidth(true));
         }
-        if (limit < windowTop) {
-          var diff = limit - windowTop;
-          sticky.el.css({
+      }
+      function staticSidebar() {
+        sticky.el.css('position', 'static');
+        settings.contentID.css('margin-left', '0px');
+        sticky.el.css('margin-left', '0px');
+      }
+
+      function limitedSidebar(diff) {
+        sticky.el.css({
             top: diff
           });
+      }
+
+      function stick() {
+        var tops = calculateLimits();
+        var hitBreakPoint = tops.stickyTop < tops.windowTop && (sticky.win.width() >= sticky.breakPoint);
+
+        if (hitBreakPoint) {
+          fixSidebar();
+          checkLeftRight();
+        }
+        else {
+          staticSidebar();
+        }
+        if (tops.limit < tops.windowTop) {
+          var diff = tops.limit - tops.windowTop;
+          limitedSidebar(diff);
         }
       }
 
@@ -67,11 +102,11 @@
         var errors = [];
         for (var key in settings) {
           if (!settings[key]) {
-            console.warn(key + ": cannot be null. Please consult http://mojotech.com/mojosticky for instructions. Terminating.");
             errors.push(settings[key]);
-            return;
           }
         }
+        ieVersion() && errors.push("NO IE 7");
+        return errors;
       }
 
       function ieVersion() {
