@@ -47,6 +47,13 @@ margin-top: 10px;
 display: block;
 opacity: 0.5;
 font-size: 11px;
+  transition: opacity 250ms;
+-moz-transition: opacity 250ms; /* Firefox 4 */
+-webkit-transition: opacity 250ms; /* Safari and Chrome */
+-o-transition: opacity 250ms; /* Opera */
+  }
+  #header a#credit:hover {
+    opacity: 1;
   }
   #header img {
     display: inline;
@@ -237,7 +244,7 @@ p#mojo {
 -o-transition: opacity 250ms; /* Opera */
 }
 #sidebarlogo img {
-  width: 80%;
+  width: 175%;
 margin-left: 8px;
 }
 a#sidebarlogo:hover{
