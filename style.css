@@ -26,6 +26,7 @@ body {
     font-family: 'din-med';
     text-transform: uppercase;
   }
+ 
   #header h1, #header p {
     margin: 20px 0px 0 0;
     font-size: 18px;
@@ -39,6 +40,20 @@ body {
     font-family: 'FuturaExtraBold';
     letter-spacing: 4px;
     }
+  #header a#credit {
+   color: #666;
+text-decoration: none;
+margin-top: 10px;
+display: block;
+opacity: 0.5;
+font-size: 11px;
+  }
+  #header img {
+    display: inline;
+    height: 10px;
+    opacity: 0.7;
+  }
+
   #main {
     width:738px;
     padding: 25px;
@@ -81,9 +96,7 @@ body {
   #sidebar ul li a {
     margin-left: 10px;
   }
-  a#side-download-link {
-    margin-top: 20px;
-  }
+
   #footer {
     width: 100%;
     clear: both;
@@ -212,4 +225,21 @@ p#mojo {
   opacity:0;
   height:0;
   width:0;
+}
+#sidebarlogo{
+  display:block;
+  margin: 8px 0 0 16px ;
+  width: 50px;
+  opacity: 0.5;
+  transition: opacity 250ms;
+-moz-transition: opacity 250ms; /* Firefox 4 */
+-webkit-transition: opacity 250ms; /* Safari and Chrome */
+-o-transition: opacity 250ms; /* Opera */
+}
+#sidebarlogo img {
+  width: 80%;
+margin-left: 8px;
+}
+a#sidebarlogo:hover{
+  opacity: 1;
 }

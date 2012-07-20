@@ -2,6 +2,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
+<title>stickyMojo contained fixed position sticky sidebar jquery plugin</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script src="js/stickyMojo.js"></script>
 <script src="js/jquery.scrollTo.min.js"></script>
@@ -21,7 +22,7 @@
 <body>
 <a href="https://github.com/mojotech/stickymojo"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
 <div id="wrapper">
-  <div id="header"><h1>stickyMojo.js</h1><p>Finally, a contained fixed positioned sticky sidebar jQuery plugin.</p></div>
+  <div id="header"><h1>stickyMojo.js</h1><p>Finally, a contained fixed positioned sticky sidebar jQuery plugin.</p><a href="http://mojotech.com" id="credit">Brought to you by <img src="mojologo-small.png" /></a></div>
 <div id="sidebar">
   <ul>
     <li class="active"><a href="#introduction">Intro</a></li>
@@ -30,13 +31,14 @@
     <li><a href="#javascript">Javascript</a></li>
     <li><a id="side-download-link" href="https://github.com/mojotech/stickymojo/zipball/master" class="btn btn-green">Download</a></li>
   </ul>
+  <a id="sidebarlogo" href="http://www.mojotech.com"><img src='mojologo-small.png'/></a>
 </div>
 <div id="main">
 <h2 id="introduction" class="scrolltrack">Introduction</h2>
-<p>stickyMojo is a contained sticky sidebar plugin for jQuery. It is lightweight, fast, flexible and compatible with Firefox, Chrome, Safari, and IE8+. It will degrade gracefully in older versions of IE.</p>
+<p>stickyMojo is a contained sticky sidebar jQuery plugin brought to you by <a href="http://www.mojotech.com">MojoTech</a>. It is lightweight, fast, flexible and compatible with Firefox, Chrome, Safari, and IE8+. It will degrade gracefully in older versions of IE.</p>
 
 <h2 id="background">Background</h2>
-<p>After looking around for a contained fixed position sticky sidebar for our blog we found that there were few options that handled all of the intricacies of cross-browser support, window resizing, and smoothness.</p>
+<p>After looking around for a contained fixed position sticky sidebar for <a href="http://www.mojotech.com">our blog</a> we found that there were few options that handled all of the intricacies of cross-browser support, window resizing, and smoothness.</p>
 
 <p>One of the solutions that many people have come up with is to have the sidebar be positioned absolutely, then animate the <tt>top</tt> property. Although this solution worked, it looked jankey compared to fixed position element.</p>
 
@@ -122,6 +124,8 @@
           });
         &lt;/script&gt;
     </pre>
+    <h2 id='questions'>Questions or comments?</h2>
+    <p>For questions or comments please visit the <a href="http://blog.mojotech.com/post/27357631319/introducing-stickymojo">Mojo Blog.</a></p>
     <h2 id="hiddenh2" class="scrolltrack">.</h2>
 </div>
 </div>
@@ -172,6 +176,16 @@
   $(window).load(function(){
     $('.toolbar').css("display", "none");
   });
+  var GoSquared={};
+  GoSquared.acct = "GSN-609790-S";
+  (function(w){
+    function gs(){
+      w._gstc_lt=+(new Date); var d=document;
+      var g = d.createElement("script"); g.type = "text/javascript"; g.async = true; g.src = "//d1l6p2sc9645hc.cloudfront.net/tracker.js";
+      var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(g, s);
+    }
+    w.addEventListener?w.addEventListener("load",gs,false):w.attachEvent("onload",gs);
+  })(window);
 </script>
 </body>
 </html>
