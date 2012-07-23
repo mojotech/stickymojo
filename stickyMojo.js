@@ -124,20 +124,11 @@
       }
 
       function ieVersion() {
-        var rv = -1;
-        if (navigator.appName == 'Microsoft Internet Explorer') {
-          var ua = navigator.userAgent;
-          var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
-          if (re.exec(ua) != null) {
-            rv = parseFloat(RegExp.$1);
-          }
+        if(document.querySelector) {
+          return false;
         }
-        if (rv >= 8.0) {
-          return false;
-        } else if (rv > -1) {
+        else {
           return true;
-        } else {
-          return false;
         }
       }
     }
