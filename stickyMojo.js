@@ -50,6 +50,7 @@
       function cacheElements() {
         settings.footerID = $(settings.footerID);
         settings.contentID = $(settings.contentID);
+        settings.document = $(document);
       }
 
       //  Calcualtes the limits top and bottom limits for the sidebar
@@ -57,7 +58,7 @@
         return {
           limit: settings.footerID.length ? 
             settings.footerID.offset().top - sticky.stickyHeight :
-            $(document).height(),
+            settings.document.height(),
           windowTop: sticky.win.scrollTop(),
           stickyTop: sticky.stickyTop2 - sticky.marg
         }
