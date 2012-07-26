@@ -50,12 +50,15 @@
       function cacheElements() {
         settings.footerID = $(settings.footerID);
         settings.contentID = $(settings.contentID);
+        settings.document = $(document);
       }
 
       //  Calcualtes the limits top and bottom limits for the sidebar
       function calculateLimits() {
         return {
-          limit: settings.footerID.offset().top - sticky.stickyHeight,
+          limit: settings.footerID.length ? 
+            settings.footerID.offset().top - sticky.stickyHeight :
+            settings.document.height(),
           windowTop: sticky.win.scrollTop(),
           stickyTop: sticky.stickyTop2 - sticky.marg
         }
@@ -116,7 +119,8 @@
         var errors = [];
         for (var key in settings) {
           if (!settings[key]) {
-            errors.push(settings[key]);
+            if (key != "footerID")  // if footerID is blank that just means there's no footer limit to apply
+              errors.push(key + " = " + settings[key]);
           }
         }
         ieVersion() && errors.push("NO IE 7");
