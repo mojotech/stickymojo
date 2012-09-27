@@ -5,7 +5,8 @@
       var settings = $.extend({
         'footerID': '',
         'contentID': '',
-        'orientation': $(this).css('float')
+        'orientation': $(this).css('float'),
+        'fixedPositionTopOffset' : 0
       }, options);
 
       var sticky = {
@@ -65,7 +66,7 @@
       function setFixedSidebar() {
         sticky.el.css({
           position: 'fixed',
-          top: 0
+          top: settings.fixedPositionTopOffset
         });
       }
 
