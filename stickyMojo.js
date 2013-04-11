@@ -1,13 +1,15 @@
 (function($) {
   $.fn.extend({
-    stickyMojo: function(options) {
-
-      var settings = $.extend({
-        'footerID': '',
-        'contentID': '',
-        'orientation': $(this).css('float')
-      }, options);
-
+    stickyMojo: function(options) 
+    {
+  	var settings = $.extend({
+		  'footerID': '',
+		  'contentID': '',
+		  'windowMinWidth': (options.windowMinWidth== undefined)? '0' : options.windowMinWidth ,
+		  'orientation': $(this).css('float')
+		}, options);
+		
+	
       var sticky = {
         'el': $(this),
         'stickyLeft': $(settings.contentID).outerWidth() + $(settings.contentID).offset.left,
@@ -15,7 +17,7 @@
         'stickyHeight': $(this).outerHeight(true),
         'contentHeight': $(settings.contentID).outerHeight(true),
         'win': $(window),
-        'breakPoint': $(this).outerWidth(true) + $(settings.contentID).outerWidth(true),
+        'breakPoint': $(this).outerHeight(true) + $(settings.contentID).outerHeight(true),
         'marg': parseInt($(this).css('margin-top'), 10)
       };
 
@@ -33,8 +35,13 @@
           sticky.win.bind({
             'scroll': stick,
             'resize': function() {
-              sticky.el.css('left', sticky.stickyLeft);
-              stick();
+	              sticky.el.css('left', sticky.stickyLeft);
+	              if($(window).width()>settings.windowMinWidth)
+	              {
+		              stick();
+	              }else {
+			          setStaticSidebar();
+	              }
             }
           });
         } else {
@@ -98,18 +105,21 @@
 
       //determines whether sidebar should stick and applies appropriate settings to make it stick
       function stick() {
-        var tops = calculateLimits();
-        var hitBreakPoint = tops.stickyTop < tops.windowTop && (sticky.win.width() >= sticky.breakPoint);
-
-        if (hitBreakPoint) {
-          setFixedSidebar();
-          checkOrientation();
-        } else {
-          setStaticSidebar();
-        }
-        if (tops.limit < tops.windowTop) {
-          var diff = tops.limit - tops.windowTop;
-          setLimitedSidebar(diff);
+      	if($(window).width()>settings.windowMinWidth)
+      	{
+	        var tops = calculateLimits();
+	
+	        var hitBreakPoint = tops.stickyTop < tops.windowTop && (sticky.win.width() >= sticky.breakPoint);
+	        if (hitBreakPoint) {
+	          setFixedSidebar();
+	          checkOrientation();
+	        } else {
+	          setStaticSidebar();
+	        }
+	        if (tops.limit < tops.windowTop) {
+	          var diff = tops.limit - tops.windowTop;
+	          setLimitedSidebar(diff);
+	        }
         }
       }
 
