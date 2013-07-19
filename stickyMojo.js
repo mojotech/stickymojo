@@ -2,6 +2,11 @@
   $.fn.extend({
     stickyMojo: function(options) {
 
+      // Exit if there are no elements to avoid errors:
+      if (this.length === 0) {
+        return this;
+      }
+
       var settings = $.extend({
         'footerID': '',
         'contentID': '',
