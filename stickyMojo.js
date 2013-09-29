@@ -31,6 +31,7 @@
           sticky.el.css('left', sticky.stickyLeft);
 
           sticky.win.bind({
+            'load': stick,
             'scroll': stick,
             'resize': function() {
               sticky.el.css('left', sticky.stickyLeft);
