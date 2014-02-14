@@ -1,0 +1,24 @@
+{
+  "name": "stickymojo",
+  "version": "1.0.0",
+  "description": "a contained sticky sidebar plguin for jquery",
+  "main": "stickyMojo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mojotech/stickymojo.git"
+  },
+  "keywords": [
+    "jquery",
+    "plugin",
+    "sticky"
+  ],
+  "author": "Mojotech",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mojotech/stickymojo/issues"
+  },
+  "homepage": "https://github.com/mojotech/stickymojo"
+}
