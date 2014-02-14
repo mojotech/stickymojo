@@ -10,7 +10,8 @@
       var settings = $.extend({
         'footerID': '',
         'contentID': '',
-        'orientation': $(this).css('float')
+        'orientation': $(this).css('float'),
+        'offsetTop': 0
       }, options);
 
       var sticky = {
@@ -21,7 +22,8 @@
         'contentHeight': $(settings.contentID).outerHeight(true),
         'win': $(window),
         'breakPoint': $(this).outerWidth(true) + $(settings.contentID).outerWidth(true),
-        'marg': parseInt($(this).css('margin-top'), 10)
+        'marg': parseInt($(this).css('margin-top'), 10),
+        'offsetTop': parseInt(settings.offsetTop, 10),
       };
 
       var errors = checkSettings();
@@ -63,7 +65,7 @@
         return {
           limit: settings.footerID.offset().top - sticky.stickyHeight,
           windowTop: sticky.win.scrollTop(),
-          stickyTop: sticky.stickyTop2 - sticky.marg
+          stickyTop: sticky.stickyTop2 - sticky.marg - sticky.offsetTop
         }
       }
 
@@ -71,7 +73,7 @@
       function setFixedSidebar() {
         sticky.el.css({
           position: 'fixed',
-          top: 0
+          top: sticky.offsetTop
         });
       }
 
