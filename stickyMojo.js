@@ -18,7 +18,7 @@
         'win': $(window),
         'breakPoint': $(this).outerWidth(true) + $(settings.contentID).outerWidth(true),
         'marg': parseInt($(this).css('margin-top'), 10),
-        'offsetTop': parseInt(settings.offsetTop),
+        'offsetTop': parseInt(settings.offsetTop, 10),
       };
 
       var errors = checkSettings();
