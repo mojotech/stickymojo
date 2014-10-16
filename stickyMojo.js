@@ -10,7 +10,8 @@
       var settings = $.extend({
         'footerID': '',
         'contentID': '',
-        'orientation': $(this).css('float')
+        'orientation': $(this).css('float'),
+        'offsetTop': 0
       }, options);
 
       var sticky = {
@@ -71,7 +72,7 @@
       function setFixedSidebar() {
         sticky.el.css({
           position: 'fixed',
-          top: 0
+          top: settings.offsetTop+'px'
         });
       }
 
@@ -103,8 +104,7 @@
       //determines whether sidebar should stick and applies appropriate settings to make it stick
       function stick() {
         var tops = calculateLimits();
-        var hitBreakPoint = tops.stickyTop < tops.windowTop && (sticky.win.width() >= sticky.breakPoint);
-
+        var hitBreakPoint = tops.stickyTop < tops.windowTop + settings.offsetTop && (sticky.win.width() >= sticky.breakPoint);
         if (hitBreakPoint) {
           setFixedSidebar();
           checkOrientation();
