@@ -120,17 +120,26 @@
       // verifies that all settings are correct
       function checkSettings() {
         var errors = [];
-        for (var key in settings) {
-          if (!settings[key]) {
-            errors.push(settings[key]);
-          }
+        if ($(settings['footerID']).length == 0) {
+          errors.push('footerID invalid');
         }
-        ieVersion() && errors.push("NO IE 7");
+        if ($(settings['contentID']).length == 0) {
+          errors.push('footerID invalid');
+        }
+        if (typeof settings['orientation'] === 'undefined') {
+          errors.push('orientation invalid');
+        }
+        if (typeof settings['offsetTop'] !== 'number') {
+          errors.push('offsetTop invalid');
+        }
+        if (ieVersion()) { 
+          errors.push("NO IE 7");
+        }
         return errors;
       }
 
       function ieVersion() {
-        if(document.querySelector) {
+        if (document.querySelector) {
           return false;
         }
         else {
