@@ -16,7 +16,7 @@
 
       var sticky = {
         'el': $(this),
-        'stickyLeft': $(settings.contentID).outerWidth() + $(settings.contentID).offset.left,
+        'stickyLeft': $(settings.contentID).outerWidth() + $(settings.contentID).offset().left,
         'stickyTop2': $(this).offset().top,
         'stickyHeight': $(this).outerHeight(true),
         'contentHeight': $(settings.contentID).outerHeight(true),
