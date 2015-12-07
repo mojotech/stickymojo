@@ -1,7 +1,6 @@
 {
   "name": "stickymojo",
   "main": "stickyMojo.js",
-  "version": "1.0.1",
   "homepage": "http://mojotech.github.io/stickymojo/",
   "authors": [
     "Mojotech"
