@@ -1,12 +1,12 @@
 {
   "name": "stickymojo",
   "main": "stickyMojo.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "http://mojotech.github.io/stickymojo/",
   "authors": [
     "Mojotech"
   ],
-  "description": "a contained sticky sidebar plguin for jquery",
+  "description": "A contained sticky sidebar plguin for jQuery",
   "keywords": [
     "jquery",
     "plugin",
